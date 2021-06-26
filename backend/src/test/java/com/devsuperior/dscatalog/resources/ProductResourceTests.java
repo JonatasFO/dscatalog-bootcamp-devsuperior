@@ -8,6 +8,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -104,7 +105,7 @@ public class ProductResourceTests {
 	public void updateShouldReturnProductDTOWhenIdExists() throws Exception {
 		String jsonBody = objectMapper.writeValueAsString(productDTO);
 
-		ResultActions result = mockMvc.perform(get("/products/{id}", existingId)
+		ResultActions result = mockMvc.perform(put("/products/{id}", existingId)
 				.content(jsonBody)
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON));
@@ -119,7 +120,7 @@ public class ProductResourceTests {
 	public void updateShouldReturnNotFoundWhenIdDoesNotExist() throws Exception {
 		String jsonBody = objectMapper.writeValueAsString(productDTO);
 
-		ResultActions result = mockMvc.perform(get("/products/{id}", nonExistingId)
+		ResultActions result = mockMvc.perform(put("/products/{id}", nonExistingId)
 				.content(jsonBody)
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON));
